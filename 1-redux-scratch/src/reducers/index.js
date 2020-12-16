@@ -10,7 +10,7 @@ const songsReducer = (songs = songsList, action) => {
     
     if(action.type === 'ADD_SONG') {
         songsList.push(action.payload)
-        return songsList
+        return [...songsList]
     } 
 
     return songs;

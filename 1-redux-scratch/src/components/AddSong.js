@@ -3,6 +3,9 @@ import { Component } from 'react'
 // import connect from react redux to connect the component to the main store
 import {connect} from 'react-redux'
 
+// import addsong action
+import { addSong } from "../actions";
+
 class AddSong extends Component {
 
     // declaring state in class component not neccassery to be inside the constructure even some developers 
@@ -17,6 +20,15 @@ class AddSong extends Component {
     // onDescriptionChange = e => {
     //     this.setState({songDescription: e.target.value})
     // }
+    onAddSongClick = () => {
+        if (this.state.songTitle !== '' && this.state.songDescription !== '') {
+            this.props.addSong({
+                title: this.state.songTitle,
+                description: this.state.description
+            })
+        }
+        
+    }
     render() {
         console.log(this.state);
         return (
@@ -43,11 +55,11 @@ class AddSong extends Component {
                     onChange={(e) => {this.setState({songDescription: e.target.value})}}
                     />
                 </div>
-                <button className="btn btn-success" >ADD</button>
+                <button onClick={this.onAddSongClick}  className="btn btn-success" >ADD</button>
 
             </div>
         )
     }
 }
 
-export default connect(null)(AddSong)
+export default connect(null, {addSong})(AddSong)
