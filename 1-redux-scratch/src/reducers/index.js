@@ -13,6 +13,12 @@ const songsReducer = (songs = songsList, action) => {
         return [...songsList]
     } 
 
+    if(action.type === 'DELETE_SONG') {
+        const newSongsList = songsList.filter(song => song.title !== action.payload.title )
+        songsList = newSongsList
+        return newSongsList
+    }
+
     return songs;
     
 

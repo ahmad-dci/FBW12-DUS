@@ -21,11 +21,14 @@ class AddSong extends Component {
     //     this.setState({songDescription: e.target.value})
     // }
     onAddSongClick = () => {
-        if (this.state.songTitle !== '' && this.state.songDescription !== '') {
+        if (this.state.songTitle.trim() !== '' && this.state.songDescription.trim() !== '') {
+            // here you need to check if the song is already exist
+
             this.props.addSong({
                 title: this.state.songTitle,
-                description: this.state.description
+                description: this.state.songDescription
             })
+            this.setState({songTitle: '', songDescription: ''})
         }
         
     }
@@ -55,7 +58,13 @@ class AddSong extends Component {
                     onChange={(e) => {this.setState({songDescription: e.target.value})}}
                     />
                 </div>
-                <button onClick={this.onAddSongClick}  className="btn btn-success" >ADD</button>
+
+
+                <div className="alert alert-danger d-none" role="alert">
+                    A song with the same title is already exist
+                </div>
+
+                <button onClick={this.onAddSongClick}  className="btn btn-success " >ADD</button>
 
             </div>
         )

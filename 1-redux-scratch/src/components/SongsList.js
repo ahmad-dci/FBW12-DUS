@@ -3,17 +3,24 @@ import {Component} from 'react'
 //import dependencies to connect the component to the main store
 import {connect} from 'react-redux'
 // import selectSong from the actions so we can change the selected song
-import {selectSong} from '../actions'
+import {selectSong, deleteSong} from '../actions'
 class SongsList extends Component{
     btnSelectClick = (song) => {
         // call the action as prop so it will change the main store value
         this.props.selectSong(song)
     }
+    btnDeleteClick = (song) => {
+        this.props.deleteSong(song)
+    }
     render() {
         console.log('show songlist props', this.props);
         const songsItems = this.props.songs.map((song, idx) => {
             return (
-            <li key={idx} className="list-group-item">{song.title} <button onClick={() => {this.btnSelectClick(song)} } className="btn btn-primary float-right">Show</button></li>
+            <li key={idx} className="list-group-item">{song.title} 
+            
+            <button onClick={() => {this.btnSelectClick(song)} } className="btn btn-primary float-right">Show</button>
+            <button onClick={() => {this.btnDeleteClick(song)} } className="btn btn-danger float-right mr-3">Delete</button>
+            </li>
             )
         })
         return(
@@ -31,4 +38,4 @@ const mapStateToProps = (state) => {
         songs: state.songs
     })
 }
-export default  connect(mapStateToProps, {selectSong})(SongsList)  
+export default  connect(mapStateToProps, {selectSong, deleteSong})(SongsList)  
