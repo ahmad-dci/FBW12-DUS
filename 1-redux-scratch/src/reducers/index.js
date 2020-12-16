@@ -6,9 +6,18 @@ let songsList = [
     {title: 'Hello', description: 'song by  Adel'}
 ]
 
-const songsReducer = (songs = songsList) => {
+const songsReducer = (songs = songsList, action) => {
     
+    if(action.type === 'ADD_SONG') {
+        songsList.push(action.payload)
+        return songsList
+    } 
+
     return songs;
+    
+
+
+    
 }
 
 const selectedSongReducer = (selectedSong = null, action) => {
