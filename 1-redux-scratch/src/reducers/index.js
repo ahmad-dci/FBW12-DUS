@@ -19,6 +19,20 @@ const songsReducer = (songs = songsList, action) => {
         return newSongsList
     }
 
+    if (action.type === 'EDIT_SONG') {
+        const newSongsList = songsList.map(song => {
+            if (song.title === action.payload.title) {
+                song.description = action.payload.description
+                return song
+            }
+            return song
+
+        })
+
+        songsList = newSongsList
+        return newSongsList
+    }
+
     return songs;
     
 
