@@ -1,4 +1,7 @@
 import { Component } from 'react'
+import {connect} from 'react-redux'
+
+import {setResult} from '../actions'
 
 import {
     InputGroup,
@@ -14,8 +17,8 @@ class SearchBar extends Component {
     }
     searchBtnClick = () => {
         getData(this.state.searchWord).then(data => {
-            //
-            console.log(data.hits);
+            this.props.setResult(data.hits)
+            console.log(data);
         })
     }
     inputKeyPress = e => {
@@ -42,4 +45,4 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar
+export default connect(null, {setResult})(SearchBar)

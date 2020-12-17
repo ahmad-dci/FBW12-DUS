@@ -9,11 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reducers from './reducers'
 
 import SearchBar from './components/SearchBar'
+import ShowResults from './components/ShowResults'
 class App extends React.Component {
     render() {
         return(
             <div className="container">
                 <SearchBar />
+                <ShowResults />
             </div>
         )
     }
