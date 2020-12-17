@@ -14,8 +14,14 @@ class SearchBar extends Component {
     }
     searchBtnClick = () => {
         getData(this.state.searchWord).then(data => {
+            //
             console.log(data.hits);
         })
+    }
+    inputKeyPress = e => {
+        if (e.keyCode === 13){
+            this.searchBtnClick()
+        }
     }
     render() {
         return (
@@ -24,7 +30,8 @@ class SearchBar extends Component {
                 <InputGroup.Prepend>
                     <Button onClick={this.searchBtnClick} variant="outline-secondary">Search</Button>
                 </InputGroup.Prepend>
-                <FormControl 
+                <FormControl
+                onKeyUp={this.inputKeyPress} 
                 value={this.state.searchWord} 
                 onChange={e => {this.setState({searchWord: e.target.value})}}
                 placeholder="Search Word" 

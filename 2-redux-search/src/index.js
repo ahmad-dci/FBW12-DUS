@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,4 +17,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.querySelector('#root'))
+ReactDOM.render(<Provider store={createStore(null)}><App /></Provider>, document.querySelector('#root'))
