@@ -26,6 +26,7 @@ class SongDetails extends Component {
             edit: false
         })
     }
+    
     editOnChange = e => {
         this.setState({
             songDescription: e.target.value
