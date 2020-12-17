@@ -10,8 +10,8 @@ class SongDetails extends Component{
             return(
                 <div className="col-md-6">
                     <h3>Song Detail</h3>
-                    <p>Song Title: {this.props.selectedSong.title} </p>
-                    <p>Song Description: {this.props.selectedSong.description}</p>
+                    <p>Song Title: {this.props.selectedSong.song.title} </p>
+                    <p>Song Description: {this.props.selectedSong.song.description}</p>
                 </div>
             )
         } else {

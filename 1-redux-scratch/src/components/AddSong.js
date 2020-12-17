@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 
 // import connect from react redux to connect the component to the main store
 import {connect} from 'react-redux'
@@ -10,6 +10,7 @@ class AddSong extends Component {
 
     // declaring state in class component not neccassery to be inside the constructure even some developers 
     // prefer to add it inside the constructure
+    warningRef = createRef()
     state = {
         songTitle: '',
         songDescription: ''
@@ -24,11 +25,22 @@ class AddSong extends Component {
         if (this.state.songTitle.trim() !== '' && this.state.songDescription.trim() !== '') {
             // here you need to check if the song is already exist
 
-            this.props.addSong({
-                title: this.state.songTitle,
-                description: this.state.songDescription
-            })
-            this.setState({songTitle: '', songDescription: ''})
+            // get the song with the same title
+            const foundSong = this.props.songs.find(song => song.title === this.state.songTitle)
+            if(foundSong){
+                // show warning message
+                this.warningRef.current.classList.remove('d-none')
+            } else {
+                // hide warning message
+                this.warningRef.current.classList.add('d-none')
+                // save the song to main store list 
+                this.props.addSong({
+                    title: this.state.songTitle,
+                    description: this.state.songDescription
+                })
+                this.setState({songTitle: '', songDescription: ''})
+            }
+            
         }
         
     }
@@ -60,7 +72,7 @@ class AddSong extends Component {
                 </div>
 
 
-                <div className="alert alert-danger d-none" role="alert">
+                <div ref={this.warningRef} className="alert alert-danger d-none" role="alert">
                     A song with the same title is already exist
                 </div>
 
@@ -71,4 +83,9 @@ class AddSong extends Component {
     }
 }
 
-export default connect(null, {addSong})(AddSong)
+const mapStateToProps = (state) => {
+    return {
+        songs: state.songs
+    }
+}
+export default connect(mapStateToProps, {addSong})(AddSong)

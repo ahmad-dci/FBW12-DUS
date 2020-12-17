@@ -7,18 +7,28 @@ import {selectSong, deleteSong} from '../actions'
 class SongsList extends Component{
     btnSelectClick = (song) => {
         // call the action as prop so it will change the main store value
-        this.props.selectSong(song)
+        this.props.selectSong({
+            song, // song: song,
+            edit: false
+        })
     }
     btnDeleteClick = (song) => {
         this.props.deleteSong(song)
+    }
+    btnEditClick = (song) => {
+        this.props.selectSong({
+            song, // song: song,
+            edit: true
+        })
     }
     render() {
         console.log('show songlist props', this.props);
         const songsItems = this.props.songs.map((song, idx) => {
             return (
             <li key={idx} className="list-group-item">{song.title} 
-            
-            <button onClick={() => {this.btnSelectClick(song)} } className="btn btn-primary float-right">Show</button>
+
+            <button onClick={() => {this.btnEditClick(song)} } className="btn btn-success float-right">Edit</button>
+            <button onClick={() => {this.btnSelectClick(song)} } className="btn btn-primary float-right mr-3">Show</button>
             <button onClick={() => {this.btnDeleteClick(song)} } className="btn btn-danger float-right mr-3">Delete</button>
             </li>
             )
