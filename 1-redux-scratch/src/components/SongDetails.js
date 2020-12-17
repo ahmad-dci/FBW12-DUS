@@ -1,14 +1,34 @@
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 
 // import connect from redux to connect this component to the main store
 import { connect } from 'react-redux'
 
 class SongDetails extends Component {
+    
+
+    
+
+    
+
+    
+    state = {
+        songDescription: ''
+    }
+
+    onSaveBtnClick = () => {
+
+    }
+    editOnChange = e => {
+        this.setState({
+            songDescription: e.target.value
+        })
+    }
     render() {
         console.log(this.props);
         if (this.props.selectedSong) {
             if (this.props.selectedSong.edit) {
                 // I need to show the song to be edited
+
                 return (
                     <div className="col-md-6">
                         <h3>Song Detail</h3>
@@ -16,9 +36,9 @@ class SongDetails extends Component {
                         <p>
                             <div className="input-group mb-3">
                                 <label className="input-group-text">Song Description:</label>
-                                <input type="text" className="form-control" placeholder="Song Description" value={this.props.selectedSong.song.description} />
+                                <input  type="text" className="form-control" placeholder="Song Description" onChange={this.editOnChange} value={this.state.songDescription}  />
                                 <div className="input-group-append">
-                                    <button className="btn btn-outline-secondary" type="button">Save</button>
+                                    <button onClick={this.onSaveBtnClick} className="btn btn-outline-secondary" type="button">Save</button>
                                 </div>
                             </div>
                         </p>
