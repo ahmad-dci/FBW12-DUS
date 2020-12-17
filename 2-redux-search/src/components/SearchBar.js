@@ -8,6 +8,9 @@ import {
 
 
 class SearchBar extends Component {
+    state = {
+        searchWord: ''
+    }
     render() {
         return (
             <div className="row mt-3">
@@ -15,7 +18,11 @@ class SearchBar extends Component {
                 <InputGroup.Prepend>
                     <Button variant="outline-secondary">Search</Button>
                 </InputGroup.Prepend>
-                <FormControl placeholder="Search Word" aria-describedby="basic-addon1" />
+                <FormControl 
+                value={this.state.searchWord} 
+                onChange={e => {this.setState({searchWord: e.target.value})}}
+                placeholder="Search Word" 
+                aria-describedby="basic-addon1" />
             </InputGroup>
             </div>
         )
